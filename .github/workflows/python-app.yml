@@ -73,10 +73,9 @@ jobs:
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
-          poetry debug info
-          poetry show
-          poetry -h
-          poetry run lint
+          poetry list
+          poetry list test
+          poetry list run
         
       - name: Formatter
         run: |
