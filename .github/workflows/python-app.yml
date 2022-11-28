@@ -75,7 +75,7 @@ jobs:
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
-          poetry run task "lint"
+          poetry run task lint -vvv
         
       - name: Formatter
         run: |
