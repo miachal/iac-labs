@@ -74,7 +74,6 @@ jobs:
           
       - name: debug
         run: |
-          head -1 /usr/bin/poetry
           python -V
           ln -s /usr/bin/python3 /usr/bin/python
           
