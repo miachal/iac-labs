@@ -30,7 +30,6 @@ jobs:
     - name: Install Poetry Action
       uses: snok/install-poetry@v1.3.3
       with:
-        version: 1.1.12
         virtualenvs-create: true
         virtualenvs-in-project: true
       
@@ -69,18 +68,12 @@ jobs:
       - name: Install Poetry Action
         uses: snok/install-poetry@v1.3.3
         with:
-          version: 1.1.12
           virtualenvs-create: false
-          
-      - name: debug
-        run: |
-          python -V
-          ln -s /usr/bin/python3 /usr/bin/python
           
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
-          poetry run task lint -vvv
+          poetry run task --list
         
       - name: Formatter
         run: |
@@ -109,7 +102,6 @@ jobs:
       - name: Install Poetry Action
         uses: snok/install-poetry@v1.3.3
         with:
-          version: 1.1.12
           virtualenvs-create: false
           
       - name: Handle cache
@@ -123,4 +115,4 @@ jobs:
         run: source ~/.local/venv/bin/activate
       
       - name: Unit tests
-        run: poetry run task test
+        run: poetry run test
