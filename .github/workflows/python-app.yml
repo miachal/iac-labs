@@ -32,17 +32,16 @@ jobs:
       with:
         virtualenvs-create: true
         virtualenvs-in-project: true
-        
-    - name: Load cache
+      
+    - name: Install dependencies
+      run: poetry install --no-interaction --no-root
+      
+    - name: Handle cache
       id: cached-venv
       uses: actions/cache@v3
       with:
         path: .venv
         key: ${{ runner.os }}-venv
-      
-    - name: Install dependencies
-      if: steps.cached-venv.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction --no-root
       
 
   lint:
@@ -65,7 +64,7 @@ jobs:
           virtualenvs-create: false
           virtualenvs-in-project: true
           
-      - name: Load cache
+      - name: Cache
         id: cached-venv
         uses: actions/cache@v3
         with:
@@ -73,12 +72,15 @@ jobs:
           key: ${{ runner.os }}-venv
       
       - name: Lint
+        if: steps.cached-venv.outputs.cache-hit == 'true'
         run: poetry run task lint
         
       - name: Formatter
+        if: steps.cached-venv.outputs.cache-hit == 'true'
         run: poetry run task formatter
         
       - name: Security
+        if: steps.cached-venv.outputs.cache-hit == 'true'
         run: poetry run task security
         
   tests:
@@ -101,7 +103,7 @@ jobs:
           virtualenvs-create: false
           virtualenvs-in-project: true
           
-      - name: Load cache
+      - name: Cache
         id: cached-venv
         uses: actions/cache@v3
         with:
@@ -109,4 +111,5 @@ jobs:
           key: ${{ runner.os }}-venv
       
       - name: Unit tests
+        if: steps.cached-venv.outputs.cache-hit == 'true'
         run: poetry run task test
