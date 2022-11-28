@@ -72,13 +72,13 @@ jobs:
           
       - name: Lint
         run: |
-          source ~/.local/venv/bin/activate
-          poetry run task lint
+          cat ~/.local/venv/bin/activate
+          poetry debug info
         
       - name: Formatter
         run: |
           source ~/.local/venv/bin/activate
-          poetry run task formatter
+          python3 -m poetry run task formatter
         
       - name: Security
         run: |
