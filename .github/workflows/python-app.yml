@@ -75,7 +75,7 @@ jobs:
           echo $(pwd)
           echo $(ls)
           echo "---"
-          echo $(ls ~/.local)
+          echo $(ls ~/.local/venv)
           
       - name: Lint
         run: |
