@@ -70,26 +70,19 @@ jobs:
         with:
           virtualenvs-create: false
           
-      - name: Debug
-        run: |
-          echo $(pwd)
-          echo $(ls)
-          echo "---"
-          echo $(ls ~/.local/venv)
-          
       - name: Lint
         run: |
-          source ~/.cache/.venv/bin/activate
+          source ~/.local/venv/bin/activate
           poetry run task lint
         
       - name: Formatter
         run: |
-          source $VENV
+          source ~/.local/venv/bin/activate
           poetry run task formatter
         
       - name: Security
         run: |
-          source $VENV
+          source ~/.local/venv/bin/activate
           poetry run task security
         
   tests:
@@ -120,5 +113,5 @@ jobs:
       
       - name: Unit tests
         run: |
-          source $VENV
+          source ~/.local/venv/bin/activate
           poetry run task test
