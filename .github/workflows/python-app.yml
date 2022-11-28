@@ -64,12 +64,19 @@ jobs:
           virtualenvs-create: false
           virtualenvs-in-project: true
       
+      - name: Handle cache
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-venv
+          
       - name: Debug
         run: |
           echo $(ls)
-          echo $(pwd)
           echo $(ls ~)
           echo $(ls ~/.cache)
+          echo $(ls .venv)
       
       - name: Lint
         run: |
@@ -105,6 +112,13 @@ jobs:
         with:
           virtualenvs-create: false
           virtualenvs-in-project: true
+          
+      - name: Handle cache
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-venv
       
       - name: Unit tests
         run: |
