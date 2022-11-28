@@ -75,7 +75,7 @@ jobs:
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
-          poetry run task lint
+          poetry run task "lint"
         
       - name: Formatter
         run: |
@@ -113,8 +113,9 @@ jobs:
         with:
           path: ~/.cache/venv
           key: ${{ runner.os }}-venv
+          
+      - name: Load venv
+        run: source ~/.local/venv/bin/activate
       
       - name: Unit tests
-        run: |
-          source ~/.local/venv/bin/activate
-          poetry run task test
+        run: poetry run task test
