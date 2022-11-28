@@ -32,16 +32,16 @@ jobs:
       with:
         virtualenvs-create: true
         virtualenvs-in-project: true
-      
-    - name: Install dependencies
-      run: poetry install --no-interaction --no-root
-      
+        
     - name: Handle cache
       id: cached-venv
       uses: actions/cache@v3
       with:
-        path: .venv
+        path: ~/.cache
         key: ${{ runner.os }}-venv
+      
+    - name: Install dependencies
+      run: poetry install --no-interaction --no-root
       
 
   lint:
@@ -63,25 +63,21 @@ jobs:
         with:
           virtualenvs-create: false
           virtualenvs-in-project: true
-          
-      - name: Cache
-        id: cached-venv
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv
       
       - name: Lint
-        if: steps.cached-venv.outputs.cache-hit == 'true'
-        run: poetry run task lint
+        run: |
+          source $VENV
+          poetry run task lint
         
       - name: Formatter
-        if: steps.cached-venv.outputs.cache-hit == 'true'
-        run: poetry run task formatter
+        run: |
+          source $VENV
+          poetry run task formatter
         
       - name: Security
-        if: steps.cached-venv.outputs.cache-hit == 'true'
-        run: poetry run task security
+        run: |
+          source $VENV
+          poetry run task security
         
   tests:
     runs-on: ubuntu-latest
@@ -102,14 +98,8 @@ jobs:
         with:
           virtualenvs-create: false
           virtualenvs-in-project: true
-          
-      - name: Cache
-        id: cached-venv
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv
       
       - name: Unit tests
-        if: steps.cached-venv.outputs.cache-hit == 'true'
-        run: poetry run task test
+        run: |
+          source $VENV
+          poetry run task test
