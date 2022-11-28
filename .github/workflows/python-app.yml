@@ -69,7 +69,13 @@ jobs:
         uses: snok/install-poetry@v1.3.3
         with:
           virtualenvs-create: false
-          virtualenvs-in-project: true
+          
+      - name: Debug
+        run: |
+          echo $(pwd)
+          echo $(ls)
+          echo "---"
+          echo $(ls ~/.local)
           
       - name: Lint
         run: |
@@ -104,7 +110,6 @@ jobs:
         uses: snok/install-poetry@v1.3.3
         with:
           virtualenvs-create: false
-          virtualenvs-in-project: true
           
       - name: Handle cache
         id: cached-venv
