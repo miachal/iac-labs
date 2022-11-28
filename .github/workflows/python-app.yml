@@ -64,9 +64,16 @@ jobs:
           virtualenvs-create: false
           virtualenvs-in-project: true
       
+      - name: Debug
+        run: |
+          echo $(ls)
+          echo $(pwd)
+          echo $(ls ~)
+          echo $(ls ~/.cache)
+      
       - name: Lint
         run: |
-          source $VENV
+          source ~/.cache/.venv/bin/activate
           poetry run task lint
         
       - name: Formatter
