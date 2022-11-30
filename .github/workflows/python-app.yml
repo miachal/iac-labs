@@ -94,7 +94,7 @@ jobs:
           
       - name: Lint
         run: |
-          source /home/runner/work/iac-labs/iac-labs/example-app/.venv
+          source /home/runner/work/iac-labs/iac-labs/example-app/.venv/bin/activate
           poetry run pip freeze
           echo "---"
           poetry run pip freeze | grep -i task
