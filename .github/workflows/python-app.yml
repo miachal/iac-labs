@@ -74,16 +74,19 @@ jobs:
           
       - name: Debug
         run: |
-          echo $(which python)
-          echo $(which python3)
+          echo $(ls ~/.local/venv/bin)
           echo "---"
-          echo $(which poetry)
+          echo $(ls ~/.local)
           echo "---"
-          echo $PATH
+          echo $(ls ~/.local/.cache)
+          echo "---"
+          echo $(ls ~/.local/.cache/venv)
+          
+      - name: Poetry debug
+        run: poetry debug info
           
       - name: Lint
         run: |
-          source ~/.local/venv/bin/activate
           poetry run task --list
         
       - name: Formatter
