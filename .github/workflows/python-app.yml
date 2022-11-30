@@ -86,6 +86,7 @@ jobs:
           
       - name: Lint
         run: |
+          source ~/.local/venv/bin/activate
           poetry debug info
           poetry run pip freeze | grep -i task
           echo "---"
