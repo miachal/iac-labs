@@ -40,7 +40,7 @@ jobs:
         virtualenvs-in-project: true
         
     - name: Add poetry to PATH
-      if: ${{ matrix.os }} == 'windows-latest'
+      if: matrix.os == 'windows-latest'
       run: $env:Path += ';C:\Users\runneradmin\.local\bin'
       
     - name: Handle cache
@@ -91,7 +91,7 @@ jobs:
           virtualenvs-create: false
           
       - name: Add poetry to PATH
-        if: ${{ matrix.os }} == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         run: $env:Path += ';C:\Users\runneradmin\.local\bin'
           
       - name: Lint
@@ -135,7 +135,7 @@ jobs:
           virtualenvs-create: false
           
       - name: Add poetry to PATH
-        if: ${{ matrix.os }} == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         run: $env:Path += ';C:\Users\runneradmin\.local\bin'
           
       - name: Handle cache
