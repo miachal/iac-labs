@@ -40,7 +40,7 @@ jobs:
       with:
         path: |
           ~/.local
-          /home/runner/work/iac-labs/iac-labs/example-app/.venv
+          ${{ github.workspace }}/.venv
         key: ${{ runner.os }}-venv
       
     - name: Install dependencies
@@ -53,6 +53,8 @@ jobs:
         poetry config --list
         echo "---"
         poetry run echo $VIRTUAL_ENV
+        echo "---"
+        echo '${{ github.workspace }}'
         
     - name: Where is my cache
       run: |
@@ -94,7 +96,7 @@ jobs:
           
       - name: Lint
         run: |
-          source /home/runner/work/iac-labs/iac-labs/example-app/.venv/bin/activate
+          source $VENV
           poetry run pip freeze
           echo "---"
           poetry run pip freeze | grep -i task
