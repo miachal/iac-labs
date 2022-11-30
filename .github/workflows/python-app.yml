@@ -123,4 +123,4 @@ jobs:
       - name: Unit tests
         run: |
           source $VENV
-          poetry run test
+          poetry run task test
