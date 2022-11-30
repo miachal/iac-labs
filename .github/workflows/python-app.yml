@@ -38,7 +38,9 @@ jobs:
       id: cached-venv
       uses: actions/cache@v3
       with:
-        path: ~/.local
+        path: |
+          ~/.local
+          ~/example-app/.venv
         key: ${{ runner.os }}-venv
       
     - name: Install dependencies
@@ -76,7 +78,9 @@ jobs:
         id: cached-venv
         uses: actions/cache@v3
         with:
-          path: ~/.local
+          path: |
+            ~/.local
+            ~/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Install Poetry Action
@@ -85,9 +89,12 @@ jobs:
           version: 1.1.12
           virtualenvs-create: false
           
+      - name: Where is my cache?
+        run: echo $(ls -a)
+          
       - name: Lint
         run: |
-          source ~/.local/venv/bin/activate
+          source $VENV
           poetry run pip freeze
           echo "---"
           poetry run pip freeze | grep -i task
@@ -126,7 +133,9 @@ jobs:
         id: cached-venv
         uses: actions/cache@v3
         with:
-          path: ~/.cache/venv
+          path: |
+            ~/.local
+            ~/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Load venv
