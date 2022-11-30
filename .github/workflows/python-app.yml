@@ -40,7 +40,7 @@ jobs:
       with:
         path: |
           ~/.local
-          ~/example-app/.venv
+          /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
       
     - name: Install dependencies
@@ -80,7 +80,7 @@ jobs:
         with:
           path: |
             ~/.local
-            ~/example-app/.venv
+            /home/runner/work/iac-labs/iac-labs/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Install Poetry Action
@@ -94,7 +94,7 @@ jobs:
           
       - name: Lint
         run: |
-          source $VENV
+          source /home/runner/work/iac-labs/iac-labs/example-app/.venv
           poetry run pip freeze
           echo "---"
           poetry run pip freeze | grep -i task
@@ -135,7 +135,7 @@ jobs:
         with:
           path: |
             ~/.local
-            ~/example-app/.venv
+            /home/runner/work/iac-labs/iac-labs/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Load venv
