@@ -42,6 +42,14 @@ jobs:
       
     - name: Install dependencies
       run: poetry install --no-interaction --no-root
+      
+    - name: Debug
+      run: |
+        poetry debug info
+        echo "---"
+        poetry config --list
+        echo "---"
+        poetry run pip freeze
         
 
   lint:
