@@ -45,21 +45,6 @@ jobs:
       
     - name: Install dependencies
       run: poetry install --no-interaction --no-root
-      
-    - name: Debug
-      run: |
-        poetry debug info
-        echo "---"
-        poetry config --list
-        echo "---"
-        poetry run echo $VIRTUAL_ENV
-        echo "---"
-        echo '${{ github.workspace }}'
-        
-    - name: Where is my cache
-      run: |
-        echo $(ls)
-        echo $(ls .venv)
         
 
   lint:
@@ -91,24 +76,19 @@ jobs:
           version: 1.1.12
           virtualenvs-create: false
           
-      - name: Where is my cache?
-        run: echo $(ls -a)
-          
       - name: Lint
         run: |
           source $VENV
-          poetry run pip freeze
-          echo "---"
-          poetry run pip freeze | grep -i task
+          poetry run task lint
         
       - name: Formatter
         run: |
-          source ~/.local/venv/bin/activate
+          source $VENV
           poetry run task formatter
         
       - name: Security
         run: |
-          source ~/.local/venv/bin/activate
+          source $VENV
           poetry run task security
         
   tests:
@@ -139,9 +119,8 @@ jobs:
             ~/.local
             ${{ github.workspace }}/example-app/.venv
           key: ${{ runner.os }}-venv
-          
-      - name: Load venv
-        run: source ~/.local/venv/bin/activate
       
       - name: Unit tests
-        run: poetry run test
+        run: |
+          source $VENV
+          poetry run test
