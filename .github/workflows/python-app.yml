@@ -14,6 +14,8 @@ permissions:
 
 jobs:
   build:
+    concurrency:
+      group: builld
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,6 +50,8 @@ jobs:
         
 
   lint:
+    concurrency:
+      group: rest
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -92,6 +96,8 @@ jobs:
           poetry run task security
         
   tests:
+    concurrency:
+      group: rest
     runs-on: ubuntu-latest
     defaults:
       run:
