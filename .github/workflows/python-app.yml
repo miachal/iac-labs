@@ -41,7 +41,7 @@ jobs:
         
     - name: Add poetry to PATH
       if: matrix.os == 'windows-latest'
-      run: $env:Path += ';C:\Users\runneradmin\.local\bin'
+      run: Add-Content $env:GITHUB_PATH "C:\Users\runneradmin\.local\bin"
       
     - name: Handle cache
       id: cached-venv
@@ -92,7 +92,7 @@ jobs:
           
       - name: Add poetry to PATH
         if: matrix.os == 'windows-latest'
-        run: $env:Path += ';C:\Users\runneradmin\.local\bin'
+        run: Add-Content $env:GITHUB_PATH "C:\Users\runneradmin\.local\bin"
           
       - name: Lint
         run: |
@@ -136,7 +136,7 @@ jobs:
           
       - name: Add poetry to PATH
         if: matrix.os == 'windows-latest'
-        run: $env:Path += ';C:\Users\runneradmin\.local\bin'
+        run: Add-Content $env:GITHUB_PATH "C:\Users\runneradmin\.local\bin"
           
       - name: Handle cache
         id: cached-venv
