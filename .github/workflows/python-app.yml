@@ -82,7 +82,7 @@ jobs:
         with:
           path: |
             ~/.local
-            /home/runner/work/iac-labs/iac-labs/example-app/.venv
+            ${{ github.workspace }}/.venv
           key: ${{ runner.os }}-venv
           
       - name: Install Poetry Action
@@ -137,7 +137,7 @@ jobs:
         with:
           path: |
             ~/.local
-            /home/runner/work/iac-labs/iac-labs/example-app/.venv
+            ${{ github.workspace }}/.venv
           key: ${{ runner.os }}-venv
           
       - name: Load venv
