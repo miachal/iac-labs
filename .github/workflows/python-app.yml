@@ -92,16 +92,19 @@ jobs:
         run: |
           source $VENV
           poetry run task lint
+        shell: bash
         
       - name: Formatter
         run: |
           source $VENV
           poetry run task formatter
+        shell: bash
         
       - name: Security
         run: |
           source $VENV
           poetry run task security
+        shell: bash
         
   tests:
     strategy:
@@ -142,3 +145,4 @@ jobs:
         run: |
           source $VENV
           poetry run task test
+        shell: bash
