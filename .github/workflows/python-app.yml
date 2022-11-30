@@ -71,26 +71,12 @@ jobs:
           version: 1.1.12
           virtualenvs-create: false
           
-      - name: Debug
-        run: |
-          echo $(ls ~/.local/venv/bin)
-          echo "---"
-          echo $(ls ~/.local)
-          echo "---"
-          echo $(ls ~/.cache)
-          
-      - name: Poetry debug
-        run: |
-          source ~/.local/venv/bin/activate
-          poetry debug info
-          
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
-          poetry debug info
-          poetry run pip freeze | grep -i task
-          echo "---"
           poetry run pip freeze
+          echo "---"
+          poetry run pip freeze | grep -i task
         
       - name: Formatter
         run: |
