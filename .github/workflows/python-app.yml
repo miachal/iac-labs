@@ -83,7 +83,9 @@ jobs:
           echo $(ls ~/.local/.cache/venv)
           
       - name: Poetry debug
-        run: poetry debug info
+        run: |
+          source ~/.local/venv/bin/activate
+          poetry debug info
           
       - name: Lint
         run: |
