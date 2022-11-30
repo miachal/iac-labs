@@ -17,8 +17,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-    concurrency:
-      group: builld
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -60,8 +58,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-    concurrency:
-      group: rest
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -113,8 +109,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-    concurrency:
-      group: rest
     runs-on: ${{ matrix.os }}
     defaults:
       run:
