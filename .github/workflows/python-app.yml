@@ -46,7 +46,6 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          ~/.local
           ${{ github.workspace }}/example-app/.venv
         key: ${{ runner.os }}-venv
       
