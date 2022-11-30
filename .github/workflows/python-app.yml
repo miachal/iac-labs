@@ -40,7 +40,7 @@ jobs:
       with:
         path: |
           ~/.local
-          ${{ github.workspace }}/.venv
+          ${{ github.workspace }}/example-app/.venv
         key: ${{ runner.os }}-venv
       
     - name: Install dependencies
@@ -82,7 +82,7 @@ jobs:
         with:
           path: |
             ~/.local
-            ${{ github.workspace }}/.venv
+            ${{ github.workspace }}/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Install Poetry Action
@@ -137,7 +137,7 @@ jobs:
         with:
           path: |
             ~/.local
-            ${{ github.workspace }}/.venv
+            ${{ github.workspace }}/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Load venv
