@@ -14,9 +14,12 @@ permissions:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     concurrency:
       group: builld
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
@@ -50,9 +53,12 @@ jobs:
         
 
   lint:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     concurrency:
       group: rest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
@@ -96,9 +102,12 @@ jobs:
           poetry run task security
         
   tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     concurrency:
       group: rest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
