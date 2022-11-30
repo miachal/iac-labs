@@ -16,7 +16,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -45,8 +45,7 @@ jobs:
       id: cached-venv
       uses: actions/cache@v3
       with:
-        path: |
-          ${{ github.workspace }}/example-app/.venv
+        path: ${{ github.workspace }}/example-app/.venv
         key: ${{ runner.os }}-venv
       
     - name: Install dependencies
@@ -56,7 +55,7 @@ jobs:
   lint:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -74,8 +73,7 @@ jobs:
         id: cached-venv
         uses: actions/cache@v3
         with:
-          path: |
-            ${{ github.workspace }}/example-app/.venv
+          path: ${{ github.workspace }}/example-app/.venv
           key: ${{ runner.os }}-venv
           
       - name: Install Poetry Action
@@ -109,7 +107,7 @@ jobs:
   tests:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -137,8 +135,7 @@ jobs:
         id: cached-venv
         uses: actions/cache@v3
         with:
-          path: |
-            ${{ github.workspace }}/example-app/.venv
+          path: ${{ github.workspace }}/example-app/.venv
           key: ${{ runner.os }}-venv
       
       - name: Unit tests
