@@ -38,6 +38,10 @@ jobs:
         version: 1.1.12
         virtualenvs-create: true
         virtualenvs-in-project: true
+        
+    - name: Add poetry to PATH
+      if: ${{ matrix.os }} == 'windows-latest'
+      run: $env:Path += ';C:\Users\runneradmin\.local\bin'
       
     - name: Handle cache
       id: cached-venv
@@ -86,6 +90,10 @@ jobs:
           version: 1.1.12
           virtualenvs-create: false
           
+      - name: Add poetry to PATH
+        if: ${{ matrix.os }} == 'windows-latest'
+        run: $env:Path += ';C:\Users\runneradmin\.local\bin'
+          
       - name: Lint
         run: |
           source $VENV
@@ -125,6 +133,10 @@ jobs:
         with:
           version: 1.1.12
           virtualenvs-create: false
+          
+      - name: Add poetry to PATH
+        if: ${{ matrix.os }} == 'windows-latest'
+        run: $env:Path += ';C:\Users\runneradmin\.local\bin'
           
       - name: Handle cache
         id: cached-venv
