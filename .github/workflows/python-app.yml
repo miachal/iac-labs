@@ -72,6 +72,15 @@ jobs:
           version: 1.1.12
           virtualenvs-create: false
           
+      - name: Debug
+        run: |
+          echo $(which python)
+          echo $(which python3)
+          echo "---"
+          echo $(which poetry)"
+          echo "---"
+          echo $PATH
+          
       - name: Lint
         run: |
           source ~/.local/venv/bin/activate
