@@ -1,19 +1,26 @@
-version: '3'
+version: "3"
 
 services:
-
   app:
     build: .
     env_file:
       - env.docker
-    ports: 
+    ports:
       - 8000:8000
     depends_on:
       - db
+    networks:
+      - lab2zad2
 
   db:
     image: postgres
     env_file:
       - env.docker
-    ports: 
+    ports:
       - 5432:5432
+    networks:
+      - lab2zad2
+
+networks:
+  lab2zad2:
+    driver: bridge
