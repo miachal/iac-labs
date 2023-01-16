@@ -540,3 +540,124 @@ Udało się zalogować. Usuwamy stos.
 ```
 > aws cloudformation delete-stack --stack-name first-stack
 ```
+
+#### Pytania
+
+> Wewnątrz szablonu CloudFormation ec2.yaml znajduje się długa matryca AWSInstanceType2Arch wymień je ze względu na typ 
+
+![](img/08.png)
+
+Previous generation instances:
+ T1, M1, M2, M3, C1, C3, G2, R3, I2
+
+General purpose:
+ T2, M4
+
+Compute optimized
+ C4, CC2
+
+Memory optimized:
+ CR1
+
+Storage optimized:
+ D2, HS1
+
+> Sekcja Resources zdefiniowała tworzone zasoby wymień je
+
+* instancja EC2
+* security group
+
+> Czym jest AZ w sekcji Outputs oraz w jakim AvailabilityZone jest stworzony stos?
+
+AZ w tym wypadku jest logicznym identyfikatorem, podobnie jak InstanceId, PublicDNS i PublicIP. Identyfikator musi być unikalny w obrębie szablonu.  
+W tym wypadku AZ to eu-central-1a.
+
+![](img/02.png)
+
+> Czy usuwając stos o nazwie zadanej usunęliśmy wszystkie zasoby?
+
+Tak, usuwając stos zostały usunięte również wszystkie zasoby.
+
+### Zadanie 5 - ECR - Elastic Container Registry, RDS - Relational Database Service i AppRunner
+
+#### ECR
+
+```
+> aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 552769563060.dkr.ecr.eu-central-1.amazonaws.com
+...
+Login Succeeded
+
+> pwd
+(...)/iac-labs/example-app
+
+> docker build -t wsb-iaac-lab2 .
+...
+ ---> 4ba6120e643e
+Successfully built 4ba6120e643e
+Successfully tagged wsb-iaac-lab2:latest
+
+> docker tag wsb-iaac-lab2:latest 552769563060.dkr.ecr.eu-central-1.amazonaws.com/wsb-iaac-lab2:latest
+
+> docker push 552769563060.dkr.ecr.eu-central-1.amazonaws.com/wsb-iaac-lab2:latest
+```
+
+![](img/03.png)
+
+#### RDS
+
+![](img/04.png)
+
+#### AppRunner!
+
+![](img/05.png)
+
+Wybieramy inny region.
+
+![](img/06.png)
+Jak możesz App runnerze... i Ty przeciwko mnie?
+
+![](img/07.png)
+a może jednak...
+
+![](img/09.png)
+wygląda ok, no to wchodzimy pod adres żeby zweryfikować i...
+
+![](img/10.png)
+
+zaglądamy w logi
+
+```
+01-16-2023 11:21:39 PM The above exception was the direct cause of the following exception:
+01-16-2023 11:21:39 PM 	Is the server running on that host and accepting TCP/IP connections?
+01-16-2023 11:21:39 PM psycopg2.OperationalError: connection to server at "db-wsb-iaac-lab2.csakxj0ebtqt.eu-central-1.rds.amazonaws.com" (172.31.29.59), port 5432 failed: Operation timed out
+```
+
+Próbujemy połączyć się przy pomocy dbeavera.
+![](img/11.png)
+
+Zaglądamy w connectivity i zmieniamy rodzaj dostępu.  
+Można również pokusić się nad jednym vpc.
+
+![](img/12.png)
+
+Wchodzimy w ustawienia Security group -> Inbound rules.
+Dodajemy rulkę żeby postgres był dostępny z każdego adresu.
+
+![](img/13.png)
+
+Próbujemy jeszcze raz połączyć się przy pomocy dbeavera.  
+Przy okazji zauważamy, że mieliśmy złą nazwę db.
+
+![](img/14.png)
+
+Edytujemy konfigurację serwisu w App runnerze (zmieniając nazwę bazy), gdy już leniuszek wstanie to próbujemy jeszcze raz.
+
+```
+> curl https://ybn2ghsmms.eu-west-1.awsapprunner.com
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><title>Redirecting...</title> <h1>Redirecting...</h1> <p>You should be redirected automatically to target URL: <a href="/login">/login</a>. If not click the link.
+```
+
+![](img/15.png)
+
+Yay, wygląda dobrze. :)  
+Usuwamy wszystkie zasoby.
