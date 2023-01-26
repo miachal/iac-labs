@@ -4,7 +4,11 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.49.0"
     }
- }
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "2.24.0"
+    }
+  }
 }
 
 provider "aws" {

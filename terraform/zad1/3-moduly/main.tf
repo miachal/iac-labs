@@ -44,7 +44,7 @@ module "webserver2" {
   name          = "web2"
   vpc_id        = module.aws_vpc_east.id
   cidr_block    = cidrsubnet(module.aws_vpc_east.cidr_block, 4, 2)
-  ami           = "ami-0a261c0e5f51090b1" # Zmodyfikuj mnie do wlasciwej wartosci
+  ami           = "ami-0d8c09355d5cab0a2"
   instance_type = "t2.micro"
 
   providers = {

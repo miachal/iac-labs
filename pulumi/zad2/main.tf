@@ -9,7 +9,7 @@
 resource "docker_image" "example_app" {
   name = "example-app"
   build {
-    path = "../../iac-labs/example-app"
+    path = "../../../iac-labs-infra/iac-labs/example-app"
     tag  = ["example-app:latest"]
     build_arg = {
       platform : "linux/amd64"
@@ -25,7 +25,7 @@ data "docker_registry_image" "postgres" {
 resource "docker_image" "postgres" {
   name          = data.docker_registry_image.postgres.name
   pull_triggers = [data.docker_registry_image.postgres.sha256_digest]
-  force_remove = true
+  force_remove  = true
 }
 
 resource "docker_network" "shared" {

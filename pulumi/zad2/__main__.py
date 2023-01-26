@@ -13,7 +13,7 @@ from pulumi_command import local
 example_app = docker.RemoteImage("exampleApp",
     name="example-app",
     build=docker.RemoteImageBuildArgs(
-        path="../../iac-labs/example-app",
+        path="../../../iac-labs-infra/iac-labs/example-app",
         tags=["example-app:latest"],
         build_arg={
             "platform": "linux/amd64",
